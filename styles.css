@@ -1,0 +1,116 @@
+:root{
+    --main-text-color: #111111;
+    --small-font-size: 30px;
+    --middle-font-size: 100px;
+    --large-font-size: 120px;
+    --main-background-color: #D4202C;
+    --secondary-background-color: #FAFAFA;
+    --main-item-color: purple;
+    --secondary-item-color: pink;
+    --main-font-family: 'Kanit', sans-serif;
+    --title-font-family: 'Rubik Mono One', monospace;
+}
+
+*{
+    box-sizing: border-box;
+    font-family: var(--main-font-family);
+}
+
+body {
+    overflow-x: hidden;
+    margin: 0;
+}
+
+/*border: blue dotted 5px;*/
+
+.homepage-wrapper{
+    height: auto;
+    width: 100vw;
+    display:flex;
+    flex-direction: column;
+}
+
+.navbar-container{
+    background-color: var(--main-background-color);
+    height: 10vh;
+}
+
+.main-container{
+    background-color: var(--secondary-background-color);
+    height: 90vh;
+    display:flex;
+}
+
+.main-left{
+    width: 40vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.big-logo-img{
+    width: 100%;
+    height: 80%;
+}
+
+.main-right{
+    width: 60vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title-container{
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.title-name, .title-year{
+    font-size: var(--large-font-size);
+    font-family: var(--title-font-family);
+}
+
+.title-description{
+    font-size: var(--small-font-size);
+}
+
+.countdown-container{
+    flex:1;
+}
+
+.countdown-timer{
+    display: flex;
+}
+
+.countdown{
+    width: 200px;
+    height: calc(var(--countdownHeight) * 1.5);
+    font-size: var(--middle-font-size);
+    --countdownHeight: calc(var(--middle-font-size) * 1.6);
+    text-align: center;
+    overflow-y: hidden;
+}
+
+.previous-digit{
+    height: var(--countdownHeight);
+    transform: translateY(calc(var(--countdownHeight) * -1));
+}
+
+.current-digit{
+    height: var(--countdownHeight);
+    transform: translateY(calc(var(--countdownHeight) * -1));
+}
+
+.countdown-description{
+    font-size: var(--small-font-size);
+    display: flex;
+}
+
+.countdown-unit{
+    text-align: center;
+    width: 25%;
+}
