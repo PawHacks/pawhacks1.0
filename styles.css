@@ -1,10 +1,10 @@
 :root{
-    --main-text-color: #111111;
-    --small-font-size: 30px;
-    --middle-font-size: 100px;
-    --large-font-size: 120px;
-    --main-background-color: #D4202C;
-    --secondary-background-color: #FAFAFA;
+    --small-font-size: 25px;
+    --middle-font-size: 80px;
+    --large-font-size: 100px;
+    --black: #111111;
+    --white: #FAFAFA;
+    --red: #D4202C;
     --main-item-color: purple;
     --secondary-item-color: pink;
     --main-font-family: 'Kanit', sans-serif;
@@ -19,24 +19,62 @@
 body {
     overflow-x: hidden;
     margin: 0;
+    background-color: var(--white);
 }
 
-/*border: blue dotted 5px;*/
+/*                     Main page                       */
 
 .homepage-wrapper{
     height: auto;
     width: 100vw;
-    display:flex;
+    display: flex;
     flex-direction: column;
 }
 
 .navbar-container{
-    background-color: var(--main-background-color);
     height: 10vh;
+    background-color: transparent;
+    display: flex;
+}
+
+.navbar-logo-img{
+    margin: 5px;
+    height: calc(100% - 10px);
+    aspect-ratio: 1;
+}
+
+.navbar-list{
+    flex: 1;
+    text-align: right;
+    list-style-type: none;
+    font-size: var(--small-font-size);
+    color: var(--black);
+}
+
+.navbar-list > * {
+    margin-right: 3vw;
+    margin-left: 3vw;
+    display: inline;
+}
+
+.register-btn{
+    width: 10vw;
+    margin: 1vw 3vw;
+    border-radius: 2vw;
+    border: none;
+    background-color: var(--black);
+    font-size: var(--small-font-size);
+    color: var(--white);
+    transition: all 0.6s;
+}
+
+.register-btn:hover {
+    background-color: var(--red);
+    color: var(--black);
 }
 
 .main-container{
-    background-color: var(--secondary-background-color);
+    background-color: var(--white);
     height: 90vh;
     display:flex;
 }
@@ -49,7 +87,7 @@ body {
     align-items: center;
 }
 
-.big-logo-img{
+.main-logo-img{
     width: 100%;
     height: 80%;
 }
@@ -69,9 +107,47 @@ body {
     justify-content: center;
 }
 
-.title-name, .title-year{
+.title-character, .title-year{
     font-size: var(--large-font-size);
     font-family: var(--title-font-family);
+}
+
+/*.title-name{*/
+/*    margin-bottom: -25px;*/
+/*}*/
+
+
+.title-character:nth-child(1) {
+    display: inline-block;
+    transform: rotate(-45deg) translateY(100px) translateX(-50px);
+}
+.title-character:nth-child(2) {
+    display: inline-block;
+    transform: rotate(-35deg) translateY(50px) translateX(-25px);
+}
+.title-character:nth-child(3) {
+    display: inline-block;
+    transform: rotate(-15deg) translateY(12.5px) translateX(-5px);
+}
+.title-character:nth-child(4) {
+    display: inline-block;
+    transform: rotate(-0deg) translateY(0px) translateX(0px);
+}
+.title-character:nth-child(5) {
+    display: inline-block;
+    transform: rotate(-0deg) translateY(0px) translateX(0px);
+}
+.title-character:nth-child(6) {
+    display: inline-block;
+    transform: rotate(15deg) translateY(12.5px) translateX(5px);
+}
+.title-character:nth-child(7) {
+    display: inline-block;
+    transform: rotate(35deg) translateY(50px) translateX(25px);
+}
+.title-character:nth-child(8) {
+    display: inline-block;
+    transform: rotate(45deg) translateY(100px) translateX(50px);
 }
 
 .title-description{
@@ -87,6 +163,7 @@ body {
 }
 
 .countdown{
+    font-weight: bolder;
     width: 200px;
     height: calc(var(--countdownHeight) * 1.5);
     font-size: var(--middle-font-size);
@@ -113,4 +190,66 @@ body {
 .countdown-unit{
     text-align: center;
     width: 25%;
+}
+
+
+
+/*                      About page                   */
+
+.about-wrapper{
+    color: var(--white);
+    background-color: var(--black);
+    text-align: center;
+}
+
+.about-wrapper > h1 {
+    font-size: var(--middle-font-size);
+}
+
+.about-wrapper > p {
+    font-size: var(--small-font-size);
+    padding-left: 15%;
+    padding-right: 15%;
+}
+
+
+
+/*                      FAQ page               */
+
+.faq-wrapper{
+    color: var(--black);
+    background-color: var(--white);
+}
+
+.faq-wrapper > h1 {
+    text-align: center;
+    font-size: var(--middle-font-size);
+}
+
+.faq-list-container{
+    display: flex;
+    padding-left: 15%;
+    padding-right: 15%;
+}
+
+.faq-list {
+    width: 50%;
+    font-size: var(--small-font-size);
+}
+
+.faq-list > li{
+    width: fit-content;
+    list-style-position: inside;
+    overflow-y: hidden;
+    cursor: pointer;
+}
+
+.faq-list > li > div{
+    max-height: 0;
+    padding-left: 2vw;
+    transition: max-height 0.6s;
+}
+
+.faq-list > li:hover > div{
+    /*max-height: 10vh;*/
 }
