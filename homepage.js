@@ -64,4 +64,21 @@ const titleCharactersList = document.querySelectorAll('.title-character');
 
 /*                        FAQ                     */
 
+const faqList = Array()
 
+document.querySelectorAll('.faq-list li').forEach((it) => {
+    faqList.push({item: it, isExpanded: false, div: it.querySelector('div')})
+})
+
+faqList.forEach((faqElement) => {
+    faqElement.item.addEventListener('click', () => {
+        if (faqElement.isExpanded){
+            faqElement.div.style.maxHeight = '200px';
+            faqElement.isExpanded = false;
+        }
+        else {
+            faqElement.div.style.maxHeight = '0px';
+            faqElement.isExpanded = true;
+        }
+    })
+})

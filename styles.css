@@ -1,25 +1,39 @@
 :root{
-    --small-font-size: 25px;
+    --micro-font-size: 25px;
+    --small-font-size: 30px;
     --middle-font-size: 80px;
-    --large-font-size: 100px;
+    --large-font-size: 130px;
     --black: #111111;
     --white: #FAFAFA;
     --red: #D4202C;
+    --green: #16BAC5;
+    --blue: #5863F8;
     --main-item-color: purple;
     --secondary-item-color: pink;
     --main-font-family: 'Kanit', sans-serif;
-    --title-font-family: 'Rubik Mono One', monospace;
+    /*--title-font-family: 'Rubik Mono One', monospace;*/
+    --title-font-family: 'Titan One', sans-serif;
 }
 
 *{
     box-sizing: border-box;
+    font-weight: bold;
     font-family: var(--main-font-family);
+    scroll-behavior: smooth;
 }
 
 body {
     overflow-x: hidden;
     margin: 0;
     background-color: var(--white);
+}
+
+.page-header {
+    text-align: center;
+    font-size: var(--middle-font-size);
+    font-family: var(--title-font-family);
+    font-weight: normal;
+    color: var(--green);
 }
 
 /*                     Main page                       */
@@ -47,8 +61,6 @@ body {
     flex: 1;
     text-align: right;
     list-style-type: none;
-    font-size: var(--small-font-size);
-    color: var(--black);
 }
 
 .navbar-list > * {
@@ -57,20 +69,33 @@ body {
     display: inline;
 }
 
+.navbar-link{
+    font-size: var(--small-font-size);
+    color: var(--black);
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.navbar-link:hover{
+    color: var(--red);
+    text-shadow: 0 0 0.15em var(--red);
+}
+
 .register-btn{
     width: 10vw;
     margin: 1vw 3vw;
     border-radius: 2vw;
     border: none;
-    background-color: var(--black);
     font-size: var(--small-font-size);
+    background-color: var(--black);
     color: var(--white);
-    transition: all 0.6s;
+    transition: all 0.4s;
 }
 
 .register-btn:hover {
     background-color: var(--red);
     color: var(--black);
+    cursor: pointer;
 }
 
 .main-container{
@@ -108,14 +133,12 @@ body {
 }
 
 .title-character, .title-year{
+    font-weight: normal;
     font-size: var(--large-font-size);
     font-family: var(--title-font-family);
+    color: var(--green);
+    text-shadow: 0 0 0.05em var(--black);
 }
-
-/*.title-name{*/
-/*    margin-bottom: -25px;*/
-/*}*/
-
 
 .title-character:nth-child(1) {
     display: inline-block;
@@ -147,8 +170,9 @@ body {
 }
 .title-character:nth-child(8) {
     display: inline-block;
-    transform: rotate(45deg) translateY(100px) translateX(50px);
+    transform: rotate(45deg) translateY(100px) translateX(60px);
 }
+
 
 .title-description{
     font-size: var(--small-font-size);
@@ -163,23 +187,31 @@ body {
 }
 
 .countdown{
-    font-weight: bolder;
     width: 200px;
     height: calc(var(--countdownHeight) * 1.5);
-    font-size: var(--middle-font-size);
     --countdownHeight: calc(var(--middle-font-size) * 1.6);
     text-align: center;
     overflow-y: hidden;
 }
 
-.previous-digit{
-    height: var(--countdownHeight);
-    transform: translateY(calc(var(--countdownHeight) * -1));
-}
-
 .current-digit{
     height: var(--countdownHeight);
     transform: translateY(calc(var(--countdownHeight) * -1));
+    font-weight: normal;
+    font-family: var(--title-font-family);
+    font-size: var(--middle-font-size);
+    color: var(--green);
+    text-shadow: 0 0 0.05em var(--black);
+}
+
+.previous-digit{
+    height: var(--countdownHeight);
+    transform: translateY(calc(var(--countdownHeight) * -1));
+    font-weight: normal;
+    font-family: var(--title-font-family);
+    font-size: var(--middle-font-size);
+    color: var(--green);
+    text-shadow: 0 0 0.05em var(--black);
 }
 
 .countdown-description{
@@ -202,10 +234,6 @@ body {
     text-align: center;
 }
 
-.about-wrapper > h1 {
-    font-size: var(--middle-font-size);
-}
-
 .about-wrapper > p {
     font-size: var(--small-font-size);
     padding-left: 15%;
@@ -219,11 +247,6 @@ body {
 .faq-wrapper{
     color: var(--black);
     background-color: var(--white);
-}
-
-.faq-wrapper > h1 {
-    text-align: center;
-    font-size: var(--middle-font-size);
 }
 
 .faq-list-container{
@@ -242,12 +265,40 @@ body {
     list-style-position: inside;
     overflow-y: hidden;
     cursor: pointer;
+    transition: all 0.3s;
+}
+
+.faq-list > li:hover {
+    animation-name: glow-red;
+    animation-duration: 1.5s;
+}
+
+@keyframes glow-red {
+    0% {
+        color: var(--black);
+        text-shadow: 0 0 0;
+    }
+
+    30% {
+        color: var(--red);
+        text-shadow: 0 0 0.15em var(--red);
+    }
+
+    100% {
+        color: var(--black);
+        text-shadow: 0 0 0;
+    }
 }
 
 .faq-list > li > div{
     max-height: 0;
     padding-left: 2vw;
-    transition: max-height 0.6s;
+    transition: max-height 1.0s;
+    cursor: default;
+    color: var(--black);
+    text-shadow: 0 0 0;
+    font-size: var(--micro-font-size);
+    font-weight: lighter;
 }
 
 .faq-list > li:hover > div{
