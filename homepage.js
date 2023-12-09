@@ -58,8 +58,44 @@ setInterval(() => {
 
 /*                      Title Name                     */
 
-const titleCharactersList = document.querySelectorAll('.title-character');
+const titleCharacters = document.querySelectorAll('.title-character');
+// setInterval(() => {
+//     for (let i = 0; i < titleCharacters.length; i++) {
+//         setTimeout(()=>{
+//             titleCharacters[i].classList.add('title-character-animation');
+//         }, 150 * i)
+//     }
+//     setTimeout(() => {
+//         for (let i = 0; i < titleCharacters.length; i++) {
+//             titleCharacters[i].classList.remove('title-character-animation');
+//         }
+//     }, 2900)
+// }, 3000)
 
+const titleContainer = document.querySelector('.title-name')
+let titleIsRotated = false;
+titleContainer.addEventListener('click', ()=>{
+    if (titleIsRotated){
+        titleIsRotated = false;
+        for (let i = 0; i < titleCharacters.length; i++) {
+            titleCharacters[i].classList.remove(`title-character-${i+1}`);
+            titleCharacters[i].style.color = 'var(--blue)'
+            setTimeout(()=>{
+                titleCharacters[i].style.color = 'var(--green)'
+            }, 600)
+        }
+    }
+    else {
+        titleIsRotated = true;
+        for (let i = 0; i < titleCharacters.length; i++) {
+            titleCharacters[i].classList.add(`title-character-${i+1}`);
+            titleCharacters[i].style.color = 'var(--blue)'
+            setTimeout(()=>{
+                titleCharacters[i].style.color = 'var(--green)'
+            }, 600)
+        }
+    }
+})
 
 
 /*                        FAQ                     */
@@ -73,12 +109,51 @@ document.querySelectorAll('.faq-list li').forEach((it) => {
 faqList.forEach((faqElement) => {
     faqElement.item.addEventListener('click', () => {
         if (faqElement.isExpanded){
-            faqElement.div.style.maxHeight = '200px';
+            faqElement.div.style.maxHeight = '0px';
             faqElement.isExpanded = false;
         }
         else {
-            faqElement.div.style.maxHeight = '0px';
+            faqElement.div.style.maxHeight = '300px';
             faqElement.isExpanded = true;
         }
     })
 })
+
+
+/*                      Scroll animations                   */
+
+const headersList = document.querySelectorAll('.page-header');
+const headerObserver = new IntersectionObserver((headers)=> {
+    headers.forEach((element)=> {
+        if (element.isIntersecting){
+            element.target.classList.remove('hidden-header');
+            element.target.classList.add('visible-header');
+        }
+        else{
+            element.target.classList.remove('visible-header');
+            element.target.classList.add('hidden-header');
+        }
+    })
+})
+
+headersList.forEach( (header)=> {
+    headerObserver.observe(header)
+} )
+
+const contentList = document.querySelectorAll('.content');
+const contentObserver = new IntersectionObserver((contents)=> {
+    contents.forEach((element)=> {
+        if (element.isIntersecting){
+            element.target.classList.remove('hidden-content');
+            element.target.classList.add('visible-content');
+        }
+        else{
+            element.target.classList.remove('visible-content');
+            element.target.classList.add('hidden-content');
+        }
+    })
+})
+
+contentList.forEach( (content)=> {
+    contentObserver.observe(content)
+} )
