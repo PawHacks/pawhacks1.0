@@ -59,18 +59,6 @@ setInterval(() => {
 /*                      Title Name                     */
 
 const titleCharacters = document.querySelectorAll('.title-character');
-// setInterval(() => {
-//     for (let i = 0; i < titleCharacters.length; i++) {
-//         setTimeout(()=>{
-//             titleCharacters[i].classList.add('title-character-animation');
-//         }, 150 * i)
-//     }
-//     setTimeout(() => {
-//         for (let i = 0; i < titleCharacters.length; i++) {
-//             titleCharacters[i].classList.remove('title-character-animation');
-//         }
-//     }, 2900)
-// }, 3000)
 
 const titleContainer = document.querySelector('.title-name')
 let titleIsRotated = false;
