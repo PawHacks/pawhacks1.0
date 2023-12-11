@@ -175,41 +175,78 @@ contentList.forEach( (content)=> {
 
 /*                     Cursor animation                    */
 
-const cursor = document.getElementById('cursor');
+const cursorElement = document.getElementById('cursor');
+const cursorSatellite1 = document.getElementById('cursor-satellite-1');
+const cursorSatellite2 = document.getElementById('cursor-satellite-2');
+const cursorSatellite3 = document.getElementById('cursor-satellite-3');
 
-let xvel = 0, yvel = 0, ypos = 0, xpos = 0, xaccel = 0, yaccel = 0;
 
-let currx = 0, curry = 0, prevx = 0, prevy = 0;
-document.addEventListener("mousemove", function(event) {
-    currx = event.clientX;
-    curry = event.clientY;
-});
-function updateCursor(){
-    const absdist = Math.sqrt(Math.pow(Math.abs(xpos - currx),2) + Math.pow(Math.abs(ypos - curry),2));
-    const xdist = currx + window.scrollX - xpos;
-    const ydist = curry + window.scrollY - ypos;
+class cursorObject {
+    ypos = 0; xpos = 0; xvel = 0; yvel = 0; xaccel = 0; yaccel = 0;
+    targx = 0; targy = 0;
 
-    xaccel = xdist / 50;
-    yaccel = ydist / 50;
+    constructor(_domElement, _initialAngle, _initialMagnitude, _radius, _kA, _kV, _omega) {
+        this.domElement = _domElement;
+        this.angle = _initialAngle;
+        this.magnitude = _initialMagnitude;
+        this.radius = _radius
+        this.kA = _kA
+        this.kV = _kV
+        this.omega = _omega;
 
-    xvel += xaccel;
-    yvel += yaccel;
-
-    if (Math.sign(xdist) !== prevx){
-        xvel = xvel * 0.87
+        _domElement.style.width = `${_radius}px`
+        _domElement.style.height = `${_radius}px`
+        _domElement.style.borderRadius = `${_radius / 2}px`
     }
-    if (Math.sign(ydist) !== prevy){
-        yvel = yvel * 0.87
-    }
-
-    xpos += xvel;
-    ypos += yvel;
-
-    cursor.style.left = `${xpos - 50}px`
-    cursor.style.top = `${ypos - 50}px`
-
-    prevx = xdist;
-    prevy = ydist;
 }
 
-setInterval(updateCursor, 10)
+
+const mainCursor = new cursorObject(cursorElement, 0, 0, 60, 35, 0.8, 0);
+const helperCursor1 = new cursorObject(cursorSatellite1, 0, 50, 50, 50, 0.92, 0.5); // mag 25 omeg 0.5
+const helperCursor2 = new cursorObject(cursorSatellite2, 205, 200, 75, 75, 0.8, 0.2); // mag 100 omeg 0.85
+const helperCursor3 = new cursorObject(cursorSatellite3, 170, 150, 35, 100, 0.7, -0.1); // mag 75 omeg -0.35
+
+
+document.addEventListener("mousemove", function(event) {
+    mainCursor.targx = event.clientX + window.scrollX;
+    mainCursor.targy = event.clientY + window.scrollY;
+});
+
+function updateSatelliteTarget(cursorSatellite, cursor){
+    cursorSatellite.targx = cursor.xpos + cursorSatellite.magnitude * Math.cos(cursorSatellite.angle)
+    cursorSatellite.targy = cursor.ypos + cursorSatellite.magnitude * Math.sin(cursorSatellite.angle)
+
+    cursorSatellite.angle += (-cursorSatellite.omega * Math.PI / 180);
+}
+
+function updateCursor(cursorObj){
+    const xdist = cursorObj.targx - cursorObj.xpos;
+    const ydist = cursorObj.targy - cursorObj.ypos;
+
+    // sets & dampens acceleration
+    cursorObj.xaccel = xdist / cursorObj.kA;
+    cursorObj.yaccel = ydist / cursorObj.kA;
+
+    cursorObj.xvel += cursorObj.xaccel;
+    cursorObj.yvel += cursorObj.yaccel;
+
+    // Dampens velocity
+    cursorObj.xvel = cursorObj.xvel * cursorObj.kV
+    cursorObj.yvel = cursorObj.yvel * cursorObj.kV
+
+    cursorObj.xpos += cursorObj.xvel;
+    cursorObj.ypos += cursorObj.yvel;
+
+    cursorObj.domElement.style.left = `${cursorObj.xpos - cursorObj.radius / 2}px`
+    cursorObj.domElement.style.top = `${cursorObj.ypos - cursorObj.radius / 2}px`
+}
+
+setInterval(() => {
+    updateSatelliteTarget(helperCursor1, mainCursor)
+    updateSatelliteTarget(helperCursor2, mainCursor)
+    updateSatelliteTarget(helperCursor3, mainCursor)
+    updateCursor(mainCursor)
+    updateCursor(helperCursor1, mainCursor)
+    updateCursor(helperCursor2, mainCursor)
+    updateCursor(helperCursor3, mainCursor)
+}, 10)

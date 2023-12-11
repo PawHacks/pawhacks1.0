@@ -379,6 +379,40 @@ body {
     font-weight: lighter;
 }
 
+/*                 Cursor animations               */
+
+#cursor{
+    position: absolute;
+    background-color: transparent;
+    /*backdrop-filter: invert();*/
+    opacity: 100%;
+    z-index: 998;
+    pointer-events: none;
+}
+
+#cursor-satellite-1{
+    position: absolute;
+    background-color: transparent;
+    backdrop-filter: invert();
+    z-index: 999;
+    pointer-events: none;
+}
+
+#cursor-satellite-2{
+    position: absolute;
+    background-color: transparent;
+    backdrop-filter: invert();
+    z-index: 999;
+    pointer-events: none;
+}
+
+#cursor-satellite-3{
+    position: absolute;
+    background-color: transparent;
+    backdrop-filter: invert();
+    z-index: 999;
+    pointer-events: none;
+}
 
 
 /*                Responsive design                */
@@ -441,22 +475,4 @@ body {
     .countdown{
         width: 70px;
     }
-}
-
-
-
-/*                 Cursor animations               */
-
-
-
-#cursor{
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    background-color: transparent;
-    backdrop-filter: invert();
-    border-radius: 50px;
-    z-index: 1000;
-    pointer-events: none;
-    transition: height 0.5s, width 0.5s;
 }
