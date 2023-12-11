@@ -105,7 +105,7 @@ body {
 .register-btn{
     width: auto; /*10vw*/
     margin: 1vw 3vw;
-    border-radius: 2vw;
+    border-radius: 1vw;
     border: none;
     font-size: var(--small-font-size);
     background-color: var(--black);
@@ -155,7 +155,6 @@ body {
 }
 
 
-
 .title-name, .title-year{
     cursor: pointer;
 }
@@ -166,7 +165,7 @@ body {
     font-size: var(--large-font-size);
     font-family: var(--title-font-family);
     color: var(--green);
-    text-shadow: 0 0 0.05em var(--black);
+    text-shadow: 0 0 0.00em var(--black);
     transition: transform 1.0s, color 0.8s;
 }
 
@@ -246,10 +245,47 @@ body {
     transform: translate(100px, 0px) rotate(-5deg);
 }
 
-
 .title-description{
     font-size: var(--small-font-size);
 }
+
+.early-interest-wrapper{
+    text-align: center;
+}
+
+.early-interest-wrapper > input{
+    display: inline-block;
+    font-size: var(--micro-font-size);
+    height: 5vh;
+    width: 50%;
+    border-radius: 1vw;
+    font-weight: normal;
+}
+
+.early-interest-wrapper > button{
+    display: inline-block;
+    font-size: var(--micro-font-size);
+    height: 5vh;
+    border-radius: 1vw;
+    border: none;
+    background-color: var(--black);
+    color: var(--white);
+    transition: all 0.4s;
+}
+
+.early-interest-wrapper > button:hover {
+    background-color: var(--red);
+    color: var(--black);
+    cursor: pointer;
+}
+
+.early-interest-wrapper > p {
+    margin: 0;
+    padding: 2.5vh 0 0 0;
+    font-size: var(--micro-font-size);
+    color: var(--blue);
+}
+
 
 .countdown-container{
     flex:1;
@@ -274,7 +310,7 @@ body {
     font-family: var(--title-font-family);
     font-size: var(--middle-font-size);
     color: var(--green);
-    text-shadow: 0 0 0.05em var(--black);
+    text-shadow: 0 0 0.00em var(--black);
 }
 
 .previous-digit{
@@ -284,7 +320,7 @@ body {
     font-family: var(--title-font-family);
     font-size: var(--middle-font-size);
     color: var(--green);
-    text-shadow: 0 0 0.05em var(--black);
+    text-shadow: 0 0 0.00em var(--black);
 }
 
 .countdown-description{

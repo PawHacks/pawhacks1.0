@@ -202,26 +202,26 @@ class cursorObject {
 
 
 const mainCursor = new cursorObject(cursorElement, 0, 0, 60, 35, 0.8, 0);
-const helperCursor1 = new cursorObject(cursorSatellite1, 0, 50, 50, 50, 0.92, 0.5); // mag 25 omeg 0.5
-const helperCursor2 = new cursorObject(cursorSatellite2, 205, 200, 75, 75, 0.8, 0.2); // mag 100 omeg 0.85
+const helperCursor1 = new cursorObject(cursorSatellite1, 0, 50, 50, 300, 0.92, 0.5); // mag 25 omeg 0.5
+const helperCursor2 = new cursorObject(cursorSatellite2, 205, 200, 75, 75, 0.8, 0.05); // mag 100 omeg 0.85
 const helperCursor3 = new cursorObject(cursorSatellite3, 170, 150, 35, 100, 0.7, -0.1); // mag 75 omeg -0.35
 
 
 document.addEventListener("mousemove", function(event) {
-    mainCursor.targx = event.clientX + window.scrollX;
-    mainCursor.targy = event.clientY + window.scrollY;
+    mainCursor.targx = event.clientX;
+    mainCursor.targy = event.clientY;
 });
 
 function updateSatelliteTarget(cursorSatellite, cursor){
-    cursorSatellite.targx = cursor.xpos + cursorSatellite.magnitude * Math.cos(cursorSatellite.angle)
-    cursorSatellite.targy = cursor.ypos + cursorSatellite.magnitude * Math.sin(cursorSatellite.angle)
+    cursorSatellite.targx = cursor.xpos + cursorSatellite.magnitude * Math.cos(cursorSatellite.angle) - window.scrollX;
+    cursorSatellite.targy = cursor.ypos + cursorSatellite.magnitude * Math.sin(cursorSatellite.angle) - window.scrollY;
 
     cursorSatellite.angle += (-cursorSatellite.omega * Math.PI / 180);
 }
 
 function updateCursor(cursorObj){
-    const xdist = cursorObj.targx - cursorObj.xpos;
-    const ydist = cursorObj.targy - cursorObj.ypos;
+    const xdist = cursorObj.targx - cursorObj.xpos + window.scrollX;
+    const ydist = cursorObj.targy - cursorObj.ypos + window.scrollY;
 
     // sets & dampens acceleration
     cursorObj.xaccel = xdist / cursorObj.kA;
