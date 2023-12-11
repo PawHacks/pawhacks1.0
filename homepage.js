@@ -50,16 +50,13 @@ function updateCountdown(){
 
 
 // Updates countdown timer every second
-setInterval(() => {
-    updateCountdown()
-}, 1000)
+setInterval(updateCountdown, 1000)
 
 
 
-/*                      Title Name                     */
+/*                      Title Name and Year                    */
 
 const titleCharacters = document.querySelectorAll('.title-character');
-
 const titleContainer = document.querySelector('.title-name')
 let titleIsRotated = false;
 titleContainer.addEventListener('click', ()=>{
@@ -86,6 +83,34 @@ titleContainer.addEventListener('click', ()=>{
 })
 
 
+const yearCharacters = document.querySelectorAll('.year-character');
+const yearContainer = document.querySelector('.title-year')
+let yearIsRotated = false;
+yearContainer.addEventListener('click', ()=>{
+    if (yearIsRotated){
+        yearIsRotated = false;
+        for (let i = 0; i < yearCharacters.length; i++) {
+            yearCharacters[i].classList.remove(`year-character-${i+1}`);
+            yearCharacters[i].style.color = 'var(--blue)'
+            setTimeout(()=>{
+                yearCharacters[i].style.color = 'var(--green)'
+            }, 600)
+        }
+    }
+    else {
+        yearIsRotated = true;
+        for (let i = 0; i < yearCharacters.length; i++) {
+            yearCharacters[i].classList.add(`year-character-${i+1}`);
+            yearCharacters[i].style.color = 'var(--blue)'
+            setTimeout(()=>{
+                yearCharacters[i].style.color = 'var(--green)'
+            }, 600)
+        }
+    }
+})
+
+
+
 /*                        FAQ                     */
 
 const faqList = Array()
@@ -101,7 +126,7 @@ faqList.forEach((faqElement) => {
             faqElement.isExpanded = false;
         }
         else {
-            faqElement.div.style.maxHeight = '300px';
+            faqElement.div.style.maxHeight = '350px';
             faqElement.isExpanded = true;
         }
     })
@@ -143,5 +168,48 @@ const contentObserver = new IntersectionObserver((contents)=> {
 })
 
 contentList.forEach( (content)=> {
-    contentObserver.observe(content)
+    contentObserver.observe(content);
 } )
+
+
+
+/*                     Cursor animation                    */
+
+const cursor = document.getElementById('cursor');
+
+let xvel = 0, yvel = 0, ypos = 0, xpos = 0, xaccel = 0, yaccel = 0;
+
+let currx = 0, curry = 0, prevx = 0, prevy = 0;
+document.addEventListener("mousemove", function(event) {
+    currx = event.clientX;
+    curry = event.clientY;
+});
+function updateCursor(){
+    const absdist = Math.sqrt(Math.pow(Math.abs(xpos - currx),2) + Math.pow(Math.abs(ypos - curry),2));
+    const xdist = currx + window.scrollX - xpos;
+    const ydist = curry + window.scrollY - ypos;
+
+    xaccel = xdist / 50;
+    yaccel = ydist / 50;
+
+    xvel += xaccel;
+    yvel += yaccel;
+
+    if (Math.sign(xdist) !== prevx){
+        xvel = xvel * 0.87
+    }
+    if (Math.sign(ydist) !== prevy){
+        yvel = yvel * 0.87
+    }
+
+    xpos += xvel;
+    ypos += yvel;
+
+    cursor.style.left = `${xpos - 50}px`
+    cursor.style.top = `${ypos - 50}px`
+
+    prevx = xdist;
+    prevy = ydist;
+}
+
+setInterval(updateCursor, 10)

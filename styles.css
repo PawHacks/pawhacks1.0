@@ -156,7 +156,7 @@ body {
 
 
 
-.title-name{
+.title-name, .title-year{
     cursor: pointer;
 }
 
@@ -193,6 +193,19 @@ body {
 }
 .title-character-8{
     transform: translate(10px, -20px) rotate(-5deg);
+}
+
+.year-character-1{
+    transform: translate(-100px, 0px) rotate(-10deg);
+}
+.year-character-2{
+    transform: translate(-35px, 10px) rotate(35deg);
+}
+.year-character-3{
+    transform: translate(35px, 15px) rotate(15deg);
+}
+.year-character-4{
+    transform: translate(100px, 0px) rotate(-5deg);
 }
 
 .title-name:hover .title-character:nth-child(1){
@@ -330,6 +343,7 @@ body {
     overflow-y: hidden;
     cursor: pointer;
     transition: all 0.3s;
+    margin-bottom: 25px;
 }
 
 .faq-list > li:hover {
@@ -365,9 +379,9 @@ body {
     font-weight: lighter;
 }
 
-.faq-list > li:hover > div{
-    /*max-height: 10vh;*/
-}
+
+
+/*                Responsive design                */
 
 
 @media (max-width: 1250px) {
@@ -427,4 +441,22 @@ body {
     .countdown{
         width: 70px;
     }
+}
+
+
+
+/*                 Cursor animations               */
+
+
+
+#cursor{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-color: transparent;
+    backdrop-filter: invert();
+    border-radius: 50px;
+    z-index: 1000;
+    pointer-events: none;
+    transition: height 0.5s, width 0.5s;
 }
