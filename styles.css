@@ -1,3 +1,5 @@
+@import url('https://unpkg.com/css.gg@2.0.0/icons/css/push-chevron-down.css');
+
 :root{
     --micro-font-size: 1.5rem; /* 25px */
     --small-font-size: 2rem; /* 30px */
@@ -31,21 +33,21 @@ body {
     font-family: var(--title-font-family);
     font-weight: normal;
     color: var(--green);
-    transition: transform 1.5s;
+    transition: transform 0.75s;
 }
 
 .hidden-header {
-    transform: translateX(-60vw);
-    opacity: 0;
+    transform: scale(0);
+    opacity: 1.0;
 }
 
 .visible-header {
     opacity: 1.0;
-    transform: translateX(0);
+    transform: scale(100%);
 }
 
 .content {
-    transition: opacity 2.0s;
+    transition: opacity 3.0s;
 }
 
 .hidden-content {
@@ -253,6 +255,13 @@ body {
     text-align: center;
 }
 
+.early-interest-wrapper > p {
+    margin: 0;
+    padding: 2.5vh 0 0 0;
+    font-size: var(--micro-font-size);
+    color: var(--blue);
+}
+
 .early-interest-wrapper > input{
     display: inline-block;
     font-size: var(--micro-font-size);
@@ -277,13 +286,6 @@ body {
     background-color: var(--red);
     color: var(--black);
     cursor: pointer;
-}
-
-.early-interest-wrapper > p {
-    margin: 0;
-    padding: 2.5vh 0 0 0;
-    font-size: var(--micro-font-size);
-    color: var(--blue);
 }
 
 
@@ -369,8 +371,9 @@ body {
 }
 
 .faq-list {
-    flex:1;
+    flex: 1;
     font-size: var(--small-font-size);
+    list-style: none;
 }
 
 .faq-list > li{
@@ -380,6 +383,10 @@ body {
     cursor: pointer;
     transition: all 0.3s;
     margin-bottom: 25px;
+    --list-content: '▸';
+}
+.faq-list > li::before{
+    content: var(--list-content);
 }
 
 .faq-list > li:hover {
@@ -420,34 +427,61 @@ body {
 #cursor{
     position: absolute;
     background-color: transparent;
-    /*backdrop-filter: invert();*/
-    opacity: 100%;
+    backdrop-filter: invert();
+    background-image: linear-gradient(var(--red), var(--blue), var(--green));
+    opacity: 40%;
     z-index: 998;
     pointer-events: none;
+    animation-timing-function: linear;
+    animation-name: rotateSatellite;
+    animation-iteration-count: infinite;
+    animation-duration: 2s;
 }
 
-#cursor-satellite-1{
+.cursor-satellite{
     position: absolute;
     background-color: transparent;
-    backdrop-filter: invert();
     z-index: 999;
     pointer-events: none;
+    overflow: hidden;
+    background-image: linear-gradient(var(--red) ,var(--blue), var(--green));
+    opacity: 40%;
+    animation-timing-function: linear;
+    animation-name: rotateSatellite;
+    animation-iteration-count: infinite;
 }
 
-#cursor-satellite-2{
-    position: absolute;
-    background-color: transparent;
-    backdrop-filter: invert();
-    z-index: 999;
-    pointer-events: none;
+
+
+@keyframes rotateSatellite {
+    0%{
+        transform: rotate(0deg) ;
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
-#cursor-satellite-3{
-    position: absolute;
-    background-color: transparent;
-    backdrop-filter: invert();
-    z-index: 999;
-    pointer-events: none;
+.cursor-satellite:nth-child(1){
+    animation-duration: 1.0s;
+    animation-direction: reverse;
+}
+
+.cursor-satellite:nth-child(2){
+    animation-duration: 3s;
+}
+
+.cursor-satellite:nth-child(3){
+    animation-duration: 3.5s;
+}
+
+.cursor-satellite:nth-child(4){
+    animation-duration: 1.75s;
+    animation-direction: reverse;
+}
+
+.cursor-satellite:nth-child(5){
+    animation-duration: 2.5s;
 }
 
 

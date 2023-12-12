@@ -111,7 +111,7 @@ yearContainer.addEventListener('click', ()=>{
 
 
 
-/*                        FAQ                     */
+/*                            FAQ                            */
 
 const faqList = Array()
 
@@ -119,21 +119,24 @@ document.querySelectorAll('.faq-list li').forEach((it) => {
     faqList.push({item: it, isExpanded: false, div: it.querySelector('div')})
 })
 
+
 faqList.forEach((faqElement) => {
     faqElement.item.addEventListener('click', () => {
         if (faqElement.isExpanded){
             faqElement.div.style.maxHeight = '0px';
+            faqElement.item.style.setProperty('--list-content', '"▸"') //▸ ▾
             faqElement.isExpanded = false;
         }
         else {
-            faqElement.div.style.maxHeight = '350px';
+            faqElement.div.style.maxHeight = '250px';
+            faqElement.item.style.setProperty('--list-content', '"▾"')
             faqElement.isExpanded = true;
         }
     })
 })
 
 
-/*                      Scroll animations                   */
+/*                            Scroll animations                          */
 
 const headersList = document.querySelectorAll('.page-header');
 const headerObserver = new IntersectionObserver((headers)=> {
@@ -173,13 +176,12 @@ contentList.forEach( (content)=> {
 
 
 
-/*                     Cursor animation                    */
+/*                            Cursor animation                          */
+
+const dt = 5; //milliseconds
 
 const cursorElement = document.getElementById('cursor');
-const cursorSatellite1 = document.getElementById('cursor-satellite-1');
-const cursorSatellite2 = document.getElementById('cursor-satellite-2');
-const cursorSatellite3 = document.getElementById('cursor-satellite-3');
-
+const cursorSatelliteElementList = document.querySelectorAll('.cursor-satellite')
 
 class cursorObject {
     ypos = 0; xpos = 0; xvel = 0; yvel = 0; xaccel = 0; yaccel = 0;
@@ -201,20 +203,30 @@ class cursorObject {
 }
 
 
-const mainCursor = new cursorObject(cursorElement, 0, 0, 60, 35, 0.8, 0);
-const helperCursor1 = new cursorObject(cursorSatellite1, 0, 50, 50, 300, 0.92, 0.5); // mag 25 omeg 0.5
-const helperCursor2 = new cursorObject(cursorSatellite2, 205, 200, 75, 75, 0.8, 0.05); // mag 100 omeg 0.85
-const helperCursor3 = new cursorObject(cursorSatellite3, 170, 150, 35, 100, 0.7, -0.1); // mag 75 omeg -0.35
+const mainCursor = new cursorObject(cursorElement, 0, 0, 0, 20, 0.7, 0);
+const helperCursor1 = new cursorObject(cursorSatelliteElementList[0], 0, 50, 35, 75, 0.8, 0.14); // mag 25 omeg 0.5
+const helperCursor2 = new cursorObject(cursorSatelliteElementList[1], 1, 60, 45, 25, 0.8, -0.10); // mag 100 omeg 0.85
+const helperCursor3 = new cursorObject(cursorSatelliteElementList[2], 2, 70, 40, 50, 0.8, 0.2); // mag 75 omeg -0.35
+const helperCursor4 = new cursorObject(cursorSatelliteElementList[3], 3, 25, 30, 100, 0.8, 0.17); // mag 25 omeg 0.5
+const helperCursor5 = new cursorObject(cursorSatelliteElementList[4], 4, 80, 25, 125, 0.8, -0.27); // mag 100 omeg 0.85
 
+const helperCursorList = [helperCursor1, helperCursor2, helperCursor3, helperCursor4, helperCursor5]
 
 document.addEventListener("mousemove", function(event) {
     mainCursor.targx = event.clientX;
     mainCursor.targy = event.clientY;
 });
 
-function updateSatelliteTarget(cursorSatellite, cursor){
-    cursorSatellite.targx = cursor.xpos + cursorSatellite.magnitude * Math.cos(cursorSatellite.angle) - window.scrollX;
-    cursorSatellite.targy = cursor.ypos + cursorSatellite.magnitude * Math.sin(cursorSatellite.angle) - window.scrollY;
+function updateSatelliteTarget(cursorSatellite, cursor, isStationary){
+
+    if (isStationary){
+        cursorSatellite.targx = cursor.xpos + cursorSatellite.magnitude * Math.cos(cursorSatellite.angle) - window.scrollX;
+        cursorSatellite.targy = cursor.ypos + cursorSatellite.magnitude * Math.sin(cursorSatellite.angle) - window.scrollY;
+    }
+    else {
+        cursorSatellite.targx = cursor.targx
+        cursorSatellite.targy = cursor.targy
+    }
 
     cursorSatellite.angle += (-cursorSatellite.omega * Math.PI / 180);
 }
@@ -241,12 +253,35 @@ function updateCursor(cursorObj){
     cursorObj.domElement.style.top = `${cursorObj.ypos - cursorObj.radius / 2}px`
 }
 
+
+let stationaryTime = 0;
+function cursorIsStationary(cursorList) {
+
+    if (Math.abs(mainCursor.xvel) < 0.1 || Math.abs(mainCursor.yvel) < 0.1){
+        stationaryTime += dt;
+    }
+    else{
+        stationaryTime = 0;
+    }
+
+    console.log(stationaryTime)
+
+    return stationaryTime > 500;
+}
+
+
+
 setInterval(() => {
-    updateSatelliteTarget(helperCursor1, mainCursor)
-    updateSatelliteTarget(helperCursor2, mainCursor)
-    updateSatelliteTarget(helperCursor3, mainCursor)
+    const isStationary = cursorIsStationary(helperCursorList);
+    updateSatelliteTarget(helperCursor1, mainCursor, isStationary)
+    updateSatelliteTarget(helperCursor2, mainCursor, isStationary)
+    updateSatelliteTarget(helperCursor3, mainCursor, isStationary)
+    updateSatelliteTarget(helperCursor4, mainCursor, isStationary)
+    updateSatelliteTarget(helperCursor5, mainCursor, isStationary)
     updateCursor(mainCursor)
-    updateCursor(helperCursor1, mainCursor)
-    updateCursor(helperCursor2, mainCursor)
-    updateCursor(helperCursor3, mainCursor)
-}, 10)
+    updateCursor(helperCursor1)
+    updateCursor(helperCursor2)
+    updateCursor(helperCursor3)
+    updateCursor(helperCursor4)
+    updateCursor(helperCursor5)
+}, dt)
