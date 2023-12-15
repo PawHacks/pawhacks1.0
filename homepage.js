@@ -59,55 +59,91 @@ setInterval(updateCountdown, 1000)
 const titleCharacters = document.querySelectorAll('.title-character');
 const titleContainer = document.querySelector('.title-name')
 let titleIsRotated = false;
-titleContainer.addEventListener('click', ()=>{
-    if (titleIsRotated){
-        titleIsRotated = false;
-        for (let i = 0; i < titleCharacters.length; i++) {
-            titleCharacters[i].classList.remove(`title-character-${i+1}`);
-            titleCharacters[i].style.color = 'var(--blue)'
-            setTimeout(()=>{
-                titleCharacters[i].style.color = 'var(--green)'
-            }, 600)
-        }
-    }
-    else {
-        titleIsRotated = true;
-        for (let i = 0; i < titleCharacters.length; i++) {
-            titleCharacters[i].classList.add(`title-character-${i+1}`);
-            titleCharacters[i].style.color = 'var(--blue)'
-            setTimeout(()=>{
-                titleCharacters[i].style.color = 'var(--green)'
-            }, 600)
-        }
-    }
-})
-
 
 const yearCharacters = document.querySelectorAll('.year-character');
 const yearContainer = document.querySelector('.title-year')
 let yearIsRotated = false;
-yearContainer.addEventListener('click', ()=>{
-    if (yearIsRotated){
-        yearIsRotated = false;
-        for (let i = 0; i < yearCharacters.length; i++) {
-            yearCharacters[i].classList.remove(`year-character-${i+1}`);
-            yearCharacters[i].style.color = 'var(--blue)'
-            setTimeout(()=>{
-                yearCharacters[i].style.color = 'var(--green)'
-            }, 600)
-        }
+
+const nameTranslateXValues = [0, 0, -20, -10, 0, 0, 0, 10];
+const nameTranslateYValues = [-50, 20, -50, 30, -10, -70, 30, -20];
+const nameRotateValues = [-10, 35, 15, -5, 10, 10, 20, -5];
+
+const yearTranslateXValues = [-50, -15, 15, 50];
+const yearTranslateYValues = [0,10,15,0];
+const yearRotateValues = [-10, 35, 15, -5];
+
+const titleObjectsList = Array()
+const yearObjectsList = Array()
+
+
+// for some reason this stuff will run before arrays are initialized, so need to delay it a bit to give time for arrays to initialize first
+setTimeout(() => {
+    for (let i = 0; i < titleCharacters.length; i++) {
+        titleObjectsList.push(new rotatingObject(titleCharacters[i], (2 * Math.PI) / (i + 1), 5, 0, 1, 1, (2.0 + (i * 0.5)) * ( (i % 2 === 0) ? -1 : 1) )); // randomizes the rotation direction and speed
+
+        // rotatingObject class sets width and height so we gotta change it back :(
+        titleCharacters[i].style.width = 'fit-content'
+        titleCharacters[i].style.height = 'fit-content'
     }
-    else {
-        yearIsRotated = true;
-        for (let i = 0; i < yearCharacters.length; i++) {
-            yearCharacters[i].classList.add(`year-character-${i+1}`);
-            yearCharacters[i].style.color = 'var(--blue)'
-            setTimeout(()=>{
-                yearCharacters[i].style.color = 'var(--green)'
-            }, 600)
-        }
+
+    for (let i = 0; i < yearCharacters.length; i++) {
+        yearObjectsList.push(new rotatingObject(yearCharacters[i], (2 * Math.PI) / (i + 1), 5, 0, 1, 1, (2.0 + (i * 0.5)) * ( (i % 2 === 0) ? -1 : 1) ));
+
+        yearCharacters[i].style.width = 'fit-content'
+        yearCharacters[i].style.height = 'fit-content'
     }
+}, 100)
+
+titleContainer.addEventListener('click', ()=>{
+    for (let i = 0; i < titleCharacters.length; i++) {
+        titleCharacters[i].style.transition = `transform ${titleIsRotated ? 0.4 : 0.4}s, color 0.8s`;
+
+        titleCharacters[i].style.color = 'var(--blue)'
+        setTimeout(()=>{
+            titleCharacters[i].style.color = 'var(--green)'
+        }, 600)
+    }
+    titleIsRotated = !titleIsRotated;
 })
+
+yearContainer.addEventListener('click', ()=>{
+    for (let i = 0; i < yearCharacters.length; i++) {
+        yearCharacters[i].style.transition = `transform ${yearIsRotated ? 0.4 : 0.4}s, color 0.8s`;
+
+        yearCharacters[i].style.color = 'var(--blue)'
+        setTimeout(()=>{
+            yearCharacters[i].style.color = 'var(--green)'
+        }, 600)
+    }
+    yearIsRotated = !yearIsRotated;
+})
+
+setInterval( ()=> {
+    // rotates characters in a circle
+    for (let i = 0; i < titleObjectsList.length; i++) {
+        titleObjectsList[i].angle += (-titleObjectsList[i].omega * Math.PI / 180);
+        titleObjectsList[i].targx = titleObjectsList[i].magnitude * Math.cos(titleObjectsList[i].angle);
+        titleObjectsList[i].targy = titleObjectsList[i].magnitude * Math.sin(titleObjectsList[i].angle);
+        if (titleIsRotated){
+            titleObjectsList[i].domElement.style.transform = `translate(${titleObjectsList[i].targx + nameTranslateXValues[i]}px, ${titleObjectsList[i].targy + nameTranslateYValues[i]}px) rotate(${nameRotateValues[i]}deg)`;
+        }
+        else {
+            titleObjectsList[i].domElement.style.transform = `translate(${titleObjectsList[i].targx}px, ${titleObjectsList[i].targy}px) rotate(0)`;
+        }
+    }
+
+    for (let i = 0; i < yearObjectsList.length; i++) {
+        yearObjectsList[i].angle += (-yearObjectsList[i].omega * Math.PI / 180);
+        yearObjectsList[i].targx = yearObjectsList[i].magnitude * Math.cos(yearObjectsList[i].angle);
+        yearObjectsList[i].targy = yearObjectsList[i].magnitude * Math.sin(yearObjectsList[i].angle);
+        if (yearIsRotated){
+            yearObjectsList[i].domElement.style.transform = `translate(${yearObjectsList[i].targx + yearTranslateXValues[i]}px, ${yearObjectsList[i].targy + yearTranslateYValues[i]}px) rotate(${yearRotateValues[i]}deg)`;
+        }
+        else {
+            yearObjectsList[i].domElement.style.transform = `translate(${yearObjectsList[i].targx}px, ${yearObjectsList[i].targy}px) rotate(0)`;
+        }
+    }
+}, 50)
 
 
 
@@ -125,13 +161,12 @@ faqList.forEach((faqElement) => {
         if (faqElement.isExpanded){
             faqElement.div.style.maxHeight = '0px';
             faqElement.item.style.setProperty('--list-content', '"▸"') //▸ ▾
-            faqElement.isExpanded = false;
         }
         else {
             faqElement.div.style.maxHeight = '250px';
             faqElement.item.style.setProperty('--list-content', '"▾"')
-            faqElement.isExpanded = true;
         }
+        faqElement.isExpanded = !faqElement.isExpanded;
     })
 })
 
@@ -178,19 +213,19 @@ contentList.forEach( (content)=> {
 
 /*                            Cursor animation                          */
 
-const dt = 5; //milliseconds
+const dt = 5; // update time in ms
 
 const cursorElement = document.getElementById('cursor');
 const cursorSatelliteElementList = document.querySelectorAll('.cursor-satellite')
 
-class cursorObject {
+class rotatingObject {
     ypos = 0; xpos = 0; xvel = 0; yvel = 0; xaccel = 0; yaccel = 0;
     targx = 0; targy = 0;
 
-    constructor(_domElement, _initialAngle, _initialMagnitude, _radius, _kA, _kV, _omega) {
+    constructor(_domElement, _initialAngle, _Magnitude, _radius, _kA, _kV, _omega) {
         this.domElement = _domElement;
         this.angle = _initialAngle;
-        this.magnitude = _initialMagnitude;
+        this.magnitude = _Magnitude;
         this.radius = _radius
         this.kA = _kA
         this.kV = _kV
@@ -202,13 +237,12 @@ class cursorObject {
     }
 }
 
-
-const mainCursor = new cursorObject(cursorElement, 0, 0, 0, 20, 0.7, 0);
-const helperCursor1 = new cursorObject(cursorSatelliteElementList[0], 0, 50, 35, 75, 0.8, 0.14); // mag 25 omeg 0.5
-const helperCursor2 = new cursorObject(cursorSatelliteElementList[1], 1, 60, 45, 25, 0.8, -0.10); // mag 100 omeg 0.85
-const helperCursor3 = new cursorObject(cursorSatelliteElementList[2], 2, 70, 40, 50, 0.8, 0.2); // mag 75 omeg -0.35
-const helperCursor4 = new cursorObject(cursorSatelliteElementList[3], 3, 25, 30, 100, 0.8, 0.17); // mag 25 omeg 0.5
-const helperCursor5 = new cursorObject(cursorSatelliteElementList[4], 4, 80, 25, 125, 0.8, -0.27); // mag 100 omeg 0.85
+const mainCursor = new rotatingObject(cursorElement, 0, 0, 0, 20, 0.7, 0);
+const helperCursor1 = new rotatingObject(cursorSatelliteElementList[0], 0, 50, 35, 75, 0.8, 0.14); // mag 25 omeg 0.5
+const helperCursor2 = new rotatingObject(cursorSatelliteElementList[1], 1, 60, 45, 25, 0.8, -0.10); // mag 100 omeg 0.85
+const helperCursor3 = new rotatingObject(cursorSatelliteElementList[2], 2, 70, 40, 50, 0.8, 0.2); // mag 75 omeg -0.35
+const helperCursor4 = new rotatingObject(cursorSatelliteElementList[3], 3, 25, 30, 100, 0.8, 0.17); // mag 25 omeg 0.5
+const helperCursor5 = new rotatingObject(cursorSatelliteElementList[4], 4, 80, 25, 125, 0.8, -0.27); // mag 100 omeg 0.85
 
 const helperCursorList = [helperCursor1, helperCursor2, helperCursor3, helperCursor4, helperCursor5]
 
@@ -235,14 +269,14 @@ function updateCursor(cursorObj){
     const xdist = cursorObj.targx - cursorObj.xpos + window.scrollX;
     const ydist = cursorObj.targy - cursorObj.ypos + window.scrollY;
 
-    // sets & dampens acceleration
+    // sets & dampens acceleration (bigger kA = slower accel)
     cursorObj.xaccel = xdist / cursorObj.kA;
     cursorObj.yaccel = ydist / cursorObj.kA;
 
     cursorObj.xvel += cursorObj.xaccel;
     cursorObj.yvel += cursorObj.yaccel;
 
-    // Dampens velocity
+    // Dampens velocity (kV should be from 0 to 1; bigger kV = more responsive)
     cursorObj.xvel = cursorObj.xvel * cursorObj.kV
     cursorObj.yvel = cursorObj.yvel * cursorObj.kV
 
@@ -256,6 +290,7 @@ function updateCursor(cursorObj){
 
 let stationaryTime = 0;
 function cursorIsStationary(cursorList) {
+    const stationaryThreshold = 200; // time in ms to be considered stationary
 
     if (Math.abs(mainCursor.xvel) < 0.1 || Math.abs(mainCursor.yvel) < 0.1){
         stationaryTime += dt;
@@ -266,10 +301,8 @@ function cursorIsStationary(cursorList) {
 
     console.log(stationaryTime)
 
-    return stationaryTime > 200;
+    return stationaryTime > stationaryThreshold;
 }
-
-
 
 setInterval(() => {
     const isStationary = cursorIsStationary(helperCursorList);
