@@ -266,22 +266,14 @@ function cursorIsStationary(cursorList) {
 
     console.log(stationaryTime)
 
-    return stationaryTime > 500;
+    return stationaryTime > 200;
 }
 
 
 
 setInterval(() => {
     const isStationary = cursorIsStationary(helperCursorList);
-    updateSatelliteTarget(helperCursor1, mainCursor, isStationary)
-    updateSatelliteTarget(helperCursor2, mainCursor, isStationary)
-    updateSatelliteTarget(helperCursor3, mainCursor, isStationary)
-    updateSatelliteTarget(helperCursor4, mainCursor, isStationary)
-    updateSatelliteTarget(helperCursor5, mainCursor, isStationary)
+    helperCursorList.forEach((it)=>{updateSatelliteTarget(it, mainCursor, isStationary)})
     updateCursor(mainCursor)
-    updateCursor(helperCursor1)
-    updateCursor(helperCursor2)
-    updateCursor(helperCursor3)
-    updateCursor(helperCursor4)
-    updateCursor(helperCursor5)
+    helperCursorList.forEach(updateCursor)
 }, dt)

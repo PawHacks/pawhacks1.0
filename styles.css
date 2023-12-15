@@ -422,6 +422,45 @@ body {
     font-weight: lighter;
 }
 
+/*                 Social Media                      */
+
+.footer-wrapper{
+    padding-top: 10vh;
+    padding-bottom: 10vh;
+    background-color: var(--black);
+    text-align: center;
+}
+
+.footer-wrapper > p {
+    color: var(--white);
+    font-size: var(--micro-font-size);
+}
+
+.socials-wrapper{
+    width: fit-content;
+    display: flex;
+    margin: auto;
+}
+
+.icon-wrapper{
+}
+
+.icon{
+    margin-left: 2.0vw;
+    margin-right: 2.0vw;
+}
+
+.icon{
+    font-size: var(--small-font-size);
+    color: var(--white);
+    transition: color 0.5s;
+}
+
+.icon:hover {
+    color: var(--red);
+}
+
+
 /*                 Cursor animations               */
 
 #cursor{
