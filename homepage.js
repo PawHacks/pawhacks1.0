@@ -94,6 +94,7 @@ setTimeout(() => {
     }
 }, 100)
 
+//checks if title is clicked
 titleContainer.addEventListener('click', ()=>{
     for (let i = 0; i < titleCharacters.length; i++) {
         titleCharacters[i].style.transition = `transform ${titleIsRotated ? 0.4 : 0.4}s, color 0.8s`;
@@ -106,6 +107,7 @@ titleContainer.addEventListener('click', ()=>{
     titleIsRotated = !titleIsRotated;
 })
 
+// checks if year is clicked
 yearContainer.addEventListener('click', ()=>{
     for (let i = 0; i < yearCharacters.length; i++) {
         yearCharacters[i].style.transition = `transform ${yearIsRotated ? 0.4 : 0.4}s, color 0.8s`;
@@ -119,28 +121,35 @@ yearContainer.addEventListener('click', ()=>{
 })
 
 setInterval( ()=> {
-    // rotates characters in a circle
-    for (let i = 0; i < titleObjectsList.length; i++) {
-        titleObjectsList[i].angle += (-titleObjectsList[i].omega * Math.PI / 180);
-        titleObjectsList[i].targx = titleObjectsList[i].magnitude * Math.cos(titleObjectsList[i].angle);
-        titleObjectsList[i].targy = titleObjectsList[i].magnitude * Math.sin(titleObjectsList[i].angle);
-        if (titleIsRotated){
-            titleObjectsList[i].domElement.style.transform = `translate(${titleObjectsList[i].targx + nameTranslateXValues[i]}px, ${titleObjectsList[i].targy + nameTranslateYValues[i]}px) rotate(${nameRotateValues[i]}deg)`;
-        }
-        else {
-            titleObjectsList[i].domElement.style.transform = `translate(${titleObjectsList[i].targx}px, ${titleObjectsList[i].targy}px) rotate(0)`;
-        }
+    if (window.innerWidth <= 1250){ // turn off all animations if screen width under 1250 px
+        titleObjectsList.forEach((it)=>{
+            it.domElement.style.transform = 'translate(0,0) rotate(0)';
+        })
+        yearObjectsList.forEach((it)=>{
+            it.domElement.style.transform = 'translate(0,0) rotate(0)';
+        })
     }
-
-    for (let i = 0; i < yearObjectsList.length; i++) {
-        yearObjectsList[i].angle += (-yearObjectsList[i].omega * Math.PI / 180);
-        yearObjectsList[i].targx = yearObjectsList[i].magnitude * Math.cos(yearObjectsList[i].angle);
-        yearObjectsList[i].targy = yearObjectsList[i].magnitude * Math.sin(yearObjectsList[i].angle);
-        if (yearIsRotated){
-            yearObjectsList[i].domElement.style.transform = `translate(${yearObjectsList[i].targx + yearTranslateXValues[i]}px, ${yearObjectsList[i].targy + yearTranslateYValues[i]}px) rotate(${yearRotateValues[i]}deg)`;
+    else { // rotates all characters
+        for (let i = 0; i < titleObjectsList.length; i++) {
+            titleObjectsList[i].angle += (-titleObjectsList[i].omega * Math.PI / 180);
+            titleObjectsList[i].targx = titleObjectsList[i].magnitude * Math.cos(titleObjectsList[i].angle);
+            titleObjectsList[i].targy = titleObjectsList[i].magnitude * Math.sin(titleObjectsList[i].angle);
+            if (titleIsRotated) {
+                titleObjectsList[i].domElement.style.transform = `translate(${titleObjectsList[i].targx + nameTranslateXValues[i]}px, ${titleObjectsList[i].targy + nameTranslateYValues[i]}px) rotate(${nameRotateValues[i]}deg)`;
+            } else {
+                titleObjectsList[i].domElement.style.transform = `translate(${titleObjectsList[i].targx}px, ${titleObjectsList[i].targy}px) rotate(0)`;
+            }
         }
-        else {
-            yearObjectsList[i].domElement.style.transform = `translate(${yearObjectsList[i].targx}px, ${yearObjectsList[i].targy}px) rotate(0)`;
+
+        for (let i = 0; i < yearObjectsList.length; i++) {
+            yearObjectsList[i].angle += (-yearObjectsList[i].omega * Math.PI / 180);
+            yearObjectsList[i].targx = yearObjectsList[i].magnitude * Math.cos(yearObjectsList[i].angle);
+            yearObjectsList[i].targy = yearObjectsList[i].magnitude * Math.sin(yearObjectsList[i].angle);
+            if (yearIsRotated) {
+                yearObjectsList[i].domElement.style.transform = `translate(${yearObjectsList[i].targx + yearTranslateXValues[i]}px, ${yearObjectsList[i].targy + yearTranslateYValues[i]}px) rotate(${yearRotateValues[i]}deg)`;
+            } else {
+                yearObjectsList[i].domElement.style.transform = `translate(${yearObjectsList[i].targx}px, ${yearObjectsList[i].targy}px) rotate(0)`;
+            }
         }
     }
 }, 50)
@@ -305,8 +314,24 @@ function cursorIsStationary(cursorList) {
 }
 
 setInterval(() => {
-    const isStationary = cursorIsStationary(helperCursorList);
-    helperCursorList.forEach((it)=>{updateSatelliteTarget(it, mainCursor, isStationary)})
-    updateCursor(mainCursor)
-    helperCursorList.forEach(updateCursor)
+    if (window.innerWidth >= 1250) { // gets rid of cursor animations under 1250 px screen width
+        helperCursorList.forEach((it)=>{
+            it.domElement.style.width = `${it.radius}px`;
+            it.domElement.style.height = `${it.radius}px`;
+        })
+
+        const isStationary = cursorIsStationary(helperCursorList);
+        helperCursorList.forEach((it) => {
+            updateSatelliteTarget(it, mainCursor, isStationary)
+        })
+        updateCursor(mainCursor)
+        helperCursorList.forEach(updateCursor)
+
+    }
+    else{
+        helperCursorList.forEach((it)=>{
+            it.domElement.style.width = '0px';
+            it.domElement.style.height = '0px';
+        })
+    }
 }, dt)
