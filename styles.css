@@ -5,11 +5,11 @@
     --small-font-size: 2vw; /* 30px */
     --middle-font-size: 5vw; /* 80px */
     --large-font-size: 7vw; /* 120px */
-    --black: #111111;
+    --black: #111111; /* 111111*/
     --white: #FAFAFA;
     --red: #D4202C;
-    --green: #16BAC5;
-    --blue: #5863F8;
+    --green: #1C5D99; /* 1C5D99 */
+    --blue: #1F01B9;
     --main-font-family: 'Kanit', sans-serif;
     --title-font-family: 'Titan One', sans-serif;
 }
@@ -77,8 +77,8 @@ body {
 }
 
 .navbar-logo-img{
-    margin: 5px;
-    height: calc(100% - 10px);
+    margin: 10px;
+    height: calc(100% - 30px);
 }
 
 .navbar-list{
@@ -138,7 +138,8 @@ body {
 
 .main-logo-img{
     width: 80%;
-    margin: auto;
+    margin-left: 20%;
+    margin-right: 0%;
 }
 
 .main-right{
@@ -174,6 +175,7 @@ body {
 
 .title-description{
     font-size: var(--small-font-size);
+    color: var(--black);
 }
 
 .early-interest-wrapper{
@@ -184,7 +186,7 @@ body {
     margin: 0;
     padding: 2.5vh 0 0 0;
     font-size: var(--micro-font-size);
-    color: var(--blue);
+    color: var(--black);
 }
 
 .early-interest-wrapper > input{
@@ -256,6 +258,7 @@ body {
 }
 
 .countdown-unit{
+    color: var(--black);
     text-align: center;
     width: 25%;
 }
@@ -392,7 +395,7 @@ body {
     position: absolute;
     background-color: transparent;
     backdrop-filter: invert();
-    background-image: linear-gradient(var(--red), var(--blue), var(--green));
+    background-image: linear-gradient(#D4202C, #5863F8, #16BAC5); /* red, blue, green */
     opacity: 40%;
     z-index: 998;
     pointer-events: none;
@@ -408,7 +411,7 @@ body {
     z-index: 999;
     pointer-events: none;
     overflow: hidden;
-    background-image: linear-gradient(var(--red) ,var(--blue), var(--green));
+    background-image: linear-gradient(#D4202C, #5863F8, #16BAC5);
     opacity: 40%;
     animation-timing-function: linear;
     animation-name: rotateSatellite;
@@ -468,6 +471,10 @@ body {
     }
     .title-description{
         padding-bottom: 10vh;
+    }
+    .main-logo-img{
+        width: 100%;
+        margin: 0;
     }
 }
 
