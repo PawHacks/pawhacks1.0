@@ -8,7 +8,7 @@
     --black: #111111; /* 111111*/
     --white: #FAFAFA;
     --red: #D4202C;
-    --green: #1C5D99; /* 1C5D99 */
+    --green: #C41E3A; /* 1C5D99 */
     --blue: darkblue;
     --main-font-family: 'Kanit', sans-serif;
     --title-font-family: 'Titan One', sans-serif;
@@ -279,8 +279,8 @@ body {
     color: var(--black);
     background-color: var(--white);
     text-align: center;
-    padding-top: 10vh;
-    padding-bottom: 15vh;
+    padding-top: 10vmin;
+    padding-bottom: 10vmin;
 }
 
 .about-wrapper > p {
@@ -294,8 +294,8 @@ body {
 /*                      FAQ page               */
 
 .faq-wrapper{
-    padding-top: 10vh;
-    padding-bottom: 15vh;
+    padding-top: 10vmin;
+    padding-bottom: 10vmin;
     color: var(--black);
     background-color: var(--white);
 }
@@ -361,8 +361,8 @@ body {
 /*                  Sponsors                        */
 
 .sponsor-wrapper {
-    padding-top: 10vh;
-    padding-bottom: 15vh;
+    padding-top: 10vmin;
+    padding-bottom: 10vmin;
 }
 
 .sponsors{
@@ -386,6 +386,22 @@ body {
     color: var(--green);
     font-weight: normal;
 }
+
+/*                 Meet the team                    */
+
+.team-wrapper {
+
+    padding-bottom: 20vmin;
+}
+.team-left, .team-right {
+    display: flex;
+
+}
+.team-left img, .team-right img {
+    height: 20vmax;
+}
+
+
 
 /*                 Social Media                      */
 
