@@ -172,7 +172,7 @@ faqList.forEach((faqElement) => {
             faqElement.item.style.setProperty('--list-content', '"▸"') //▸ ▾
         }
         else {
-            faqElement.div.style.maxHeight = '350px';
+            faqElement.div.style.maxHeight = '400px';
             faqElement.item.style.setProperty('--list-content', '"▾"')
         }
         faqElement.isExpanded = !faqElement.isExpanded;

@@ -64,6 +64,7 @@ body {
 /*                     Main page                       */
 
 .homepage-wrapper{
+    padding-bottom: 10vmin;
     height: auto;
     width: 100vw;
     display: flex;
@@ -280,8 +281,7 @@ body {
     color: var(--black);
     background-color: var(--white);
     text-align: center;
-    padding-top: 10vmin;
-    padding-bottom: 10vmin;
+    padding-bottom: 20vmin;
 }
 
 .about-wrapper > p {
@@ -295,8 +295,7 @@ body {
 /*                      FAQ page               */
 
 .faq-wrapper{
-    padding-top: 10vmin;
-    padding-bottom: 10vmin;
+    padding-bottom: 20vmin;
     color: var(--black);
     background-color: var(--white);
 }
@@ -362,8 +361,7 @@ body {
 /*                  Sponsors                        */
 
 .sponsor-wrapper {
-    padding-top: 10vmin;
-    padding-bottom: 10vmin;
+    padding-bottom: 20vmin;
 }
 
 .sponsors{
@@ -523,14 +521,17 @@ body {
     }
     .main-left{
         width: 50vw;
-        padding-top: 10vh;
-        padding-bottom: 10vh;
+        padding-top: 20vmin;
+        padding-bottom: 10vmin;
     }
     .main-right{
         width: 100vw;
     }
+    .early-interest-wrapper {
+        padding-bottom: 10vmin;
+    }
     .title-description{
-        padding-bottom: 10vh;
+        padding-bottom: 10vmin;
     }
     .main-logo-img{
         width: 100%;
