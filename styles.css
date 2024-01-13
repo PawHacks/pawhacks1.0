@@ -79,6 +79,7 @@ body {
     position: fixed;
     z-index: 899;
     width: 100%;
+    align-items: center;
     height: 10vh;
     background-color: var(--black);
     display: flex;
@@ -509,6 +510,12 @@ body {
 
 
 @media (max-width: 1250px) {
+    :root{
+        --micro-font-size: 1.5rem;
+        --small-font-size: 1.75rem; /* 30px */
+        --middle-font-size: 3.5rem; /* 80px */
+        --large-font-size: 4.25rem; /* 120px */
+    }
     .main-container{
         flex-direction: column;
         height: auto;
@@ -532,12 +539,6 @@ body {
 }
 
 @media (max-width: 800px) {
-    :root{
-        --micro-font-size: 1.0rem; /* 25px */
-        --small-font-size: 1.25rem; /* 30px */
-        --middle-font-size: 2.5rem; /* 80px */
-        --large-font-size: 3.5rem; /* 120px */
-    }
     .faq-list-container{
         flex-direction: column;
     }
@@ -548,14 +549,13 @@ body {
         width: 90px;
     }
     .navbar-container{
-        align-items: center;
-        height: 15vh;
+        height: 10vh;
     }
     .register-btn{
         height: fit-content;
     }
     .navbar-logo-img{
-        height: 25%;
+        height: calc(100vh * 0.04);
     }
 }
 
