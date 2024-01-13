@@ -509,10 +509,10 @@ body {
 
 @media (max-width: 1250px) {
     :root{
-        --micro-font-size: 1.5rem;
-        --small-font-size: 1.75rem; /* 30px */
-        --middle-font-size: 3.5rem; /* 80px */
-        --large-font-size: 4.25rem; /* 120px */
+        --micro-font-size: 1.2rem;
+        --small-font-size: 1.4rem; /* 30px */
+        --middle-font-size: 3.3rem; /* 80px */
+        --large-font-size: 3.8rem; /* 120px */
     }
     .main-container{
         flex-direction: column;
