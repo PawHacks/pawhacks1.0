@@ -9,7 +9,7 @@
     --white: #FAFAFA;
     --red: #D4202C;
     --green: #1C5D99; /* 1C5D99 */
-    --blue: #1F01B9;
+    --blue: darkblue;
     --main-font-family: 'Kanit', sans-serif;
     --title-font-family: 'Titan One', sans-serif;
 }
@@ -70,10 +70,19 @@ body {
     flex-direction: column;
 }
 
-.navbar-container{
+.navbar-filler{
+    width: 100%;
     height: 10vh;
-    background-color: transparent;
+}
+
+.navbar-container{
+    position: fixed;
+    z-index: 899;
+    width: 100%;
+    height: 10vh;
+    background-color: var(--black);
     display: flex;
+    /*border-bottom: 1px solid rgba(0, 0, 0, 0.2);*/
 }
 
 .navbar-logo-img{
@@ -95,7 +104,7 @@ body {
 
 .navbar-link{
     font-size: var(--small-font-size);
-    color: var(--black);
+    color: var(--white);
     text-decoration: none;
     transition: all 0.3s;
 }
@@ -157,7 +166,6 @@ body {
     align-items: center;
     justify-content: center;
 }
-
 
 .title-name, .title-year{
     cursor: pointer;
@@ -268,15 +276,15 @@ body {
 /*                      About page                   */
 
 .about-wrapper{
-    color: var(--white);
-    background-color: var(--black);
+    color: var(--black);
+    background-color: var(--white);
     text-align: center;
     padding-top: 10vh;
     padding-bottom: 15vh;
 }
 
 .about-wrapper > p {
-    font-size: var(--micro-font-size);
+    font-size: var(--small-font-size);
     padding-left: 10%;
     padding-right: 10%;
 }
@@ -348,6 +356,35 @@ body {
     text-shadow: 0 0 0;
     font-size: var(--micro-font-size);
     font-weight: lighter;
+}
+
+/*                  Sponsors                        */
+
+.sponsor-wrapper {
+    padding-top: 10vh;
+    padding-bottom: 15vh;
+}
+
+.sponsors{
+    /*border: 5px pink dotted;*/
+}
+
+.sponsors > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sponsors > div > a > img {
+    margin: 3vw;
+    height: 7vmax;
+}
+
+.special-contributions {
+    text-align: center;
+    font-size: var(--small-font-size);
+    color: var(--green);
+    font-weight: normal;
 }
 
 /*                 Social Media                      */

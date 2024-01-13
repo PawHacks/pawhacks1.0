@@ -92,7 +92,7 @@ setTimeout(() => {
         yearCharacters[i].style.width = 'fit-content'
         yearCharacters[i].style.height = 'fit-content'
     }
-}, 100)
+}, 300)
 
 //checks if title is clicked
 titleContainer.addEventListener('click', ()=>{
@@ -172,7 +172,7 @@ faqList.forEach((faqElement) => {
             faqElement.item.style.setProperty('--list-content', '"▸"') //▸ ▾
         }
         else {
-            faqElement.div.style.maxHeight = '250px';
+            faqElement.div.style.maxHeight = '350px';
             faqElement.item.style.setProperty('--list-content', '"▾"')
         }
         faqElement.isExpanded = !faqElement.isExpanded;
@@ -217,6 +217,10 @@ const contentObserver = new IntersectionObserver((contents)=> {
 contentList.forEach( (content)=> {
     contentObserver.observe(content);
 } )
+
+
+
+/*                            navbar scroll animations                  */
 
 
 
