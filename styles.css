@@ -281,7 +281,7 @@ body {
 .about-wrapper{
     color: var(--black);
     background-color: var(--white);
-    text-align: left;
+    text-align: center;
     margin-bottom: 20vmin;
 }
 
