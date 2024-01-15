@@ -118,10 +118,14 @@ body {
 }
 
 .register-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: auto; /*10vw*/
     margin: 1vw 3vw;
     border-radius: 1vw;
     border: none;
+    font-family: var(--main-font-family);
     font-size: var(--small-font-size);
     background-color: var(--red);
     color: var(--black);
