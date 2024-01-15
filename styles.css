@@ -1,10 +1,10 @@
 @import url('https://unpkg.com/css.gg@2.0.0/icons/css/push-chevron-down.css');
 
 :root{
-    --micro-font-size: 1.5vw; /* 25px */
-    --small-font-size: 2vw; /* 30px */
-    --middle-font-size: 5vw; /* 80px */
-    --large-font-size: 7vw; /* 120px */
+    --micro-font-size: 1.5rem; /* 25px */
+    --small-font-size: 2.25rem; /* 30px */
+    --middle-font-size: 5rem; /* 80px */
+    --large-font-size: 7rem; /* 120px */
     --black: #111111; /* 111111*/
     --white: #FAFAFA;
     --red: #D4202C;
@@ -28,22 +28,24 @@ body {
 }
 
 .page-header {
+    margin: 0 auto;
     text-align: center;
     font-size: var(--middle-font-size);
     font-family: var(--title-font-family);
     font-weight: normal;
     color: var(--green);
-    transition: transform 0.75s;
+    transition: width 2s linear;
+    overflow: hidden;
 }
 
 .hidden-header {
-    transform: scale(0);
-    opacity: 1.0;
+    width: 0;
+    opacity: 0;
 }
 
 .visible-header {
-    opacity: 1.0;
-    transform: scale(100%);
+    width: calc(var(--middle-font-size) * 10);
+    opacity: 100%;
 }
 
 .content {
@@ -64,7 +66,7 @@ body {
 /*                     Main page                       */
 
 .homepage-wrapper{
-    padding-bottom: 10vmin;
+    margin-bottom: 10vmin;
     height: auto;
     width: 100vw;
     display: flex;
@@ -80,7 +82,6 @@ body {
     position: fixed;
     z-index: 899;
     width: 100%;
-    align-items: center;
     height: 10vh;
     background-color: var(--black);
     display: flex;
@@ -89,7 +90,6 @@ body {
 
 .navbar-logo-img{
     margin: 10px;
-    height: calc(100% - 30px);
 }
 
 .navbar-list{
@@ -122,14 +122,14 @@ body {
     border-radius: 1vw;
     border: none;
     font-size: var(--small-font-size);
-    background-color: var(--black);
-    color: var(--white);
+    background-color: var(--red);
+    color: var(--black);
     transition: all 0.4s;
 }
 
 .register-btn:hover {
-    background-color: var(--red);
-    color: var(--black);
+    background-color: var(--white);
+    color: var(--red);
     cursor: pointer;
 }
 
@@ -280,8 +280,8 @@ body {
 .about-wrapper{
     color: var(--black);
     background-color: var(--white);
-    text-align: center;
-    padding-bottom: 20vmin;
+    text-align: left;
+    margin-bottom: 20vmin;
 }
 
 .about-wrapper > p {
@@ -295,7 +295,7 @@ body {
 /*                      FAQ page               */
 
 .faq-wrapper{
-    padding-bottom: 20vmin;
+    margin-bottom: 20vmin;
     color: var(--black);
     background-color: var(--white);
 }
@@ -361,22 +361,24 @@ body {
 /*                  Sponsors                        */
 
 .sponsor-wrapper {
-    padding-bottom: 20vmin;
+    margin-bottom: 20vmin;
 }
 
 .sponsors{
-    /*border: 5px pink dotted;*/
+    padding-right: 10%;
+    padding-left: 10%;
 }
 
 .sponsors > div {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
 }
 
 .sponsors > div > a > img {
     margin: 3vw;
-    height: 7vmax;
+    height: 10vmax;
 }
 
 .special-contributions {
@@ -389,18 +391,36 @@ body {
 /*                 Meet the team                    */
 
 .team-wrapper {
-
-    padding-bottom: 20vmin;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-bottom: 20vmin;
 }
-.team-left, .team-right {
-    display: flex;
-
-}
-.team-left img, .team-right img {
-    height: 20vmax;
+.team-wrapper > div{
+    margin-top: 5vmin;
 }
 
+.team-left img, .team-right img, .team-wrapper > div{
+    height: 15vmax;
+    margin-left: 5vmin;
+    margin-right: 5vmin;
+}
 
+.team-left, .team-right{
+    display: inline-block;
+    animation-name: carousel;
+    animation-duration: 30s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes carousel {
+    0% {
+        transform: translateX(0);
+    }
+    100%{
+        transform: translateX(-100%);
+    }
+}
 
 /*                 Social Media                      */
 
@@ -508,12 +528,6 @@ body {
 
 
 @media (max-width: 1250px) {
-    :root{
-        --micro-font-size: 1.2rem;
-        --small-font-size: 1.4rem; /* 30px */
-        --middle-font-size: 3.3rem; /* 80px */
-        --large-font-size: 3.8rem; /* 120px */
-    }
     .main-container{
         flex-direction: column;
         height: auto;
@@ -521,25 +535,39 @@ body {
     }
     .main-left{
         width: 50vw;
-        padding-top: 20vmin;
-        padding-bottom: 10vmin;
+        margin-top: 20vmin;
+        margin-bottom: 10vmin;
     }
     .main-right{
         width: 100vw;
     }
     .early-interest-wrapper {
-        padding-bottom: 10vmin;
+        margin-bottom: 10vmin;
     }
     .title-description{
-        padding-bottom: 10vmin;
+        margin-bottom: 10vmin;
     }
     .main-logo-img{
         width: 100%;
         margin: 0;
     }
+    .navbar-container{
+        align-items: center;
+        height: 10vh;
+    }
+    .navbar-logo-img{
+        height: 50%;
+        content: url('assets/paw-icon.png');
+    }
 }
 
 @media (max-width: 800px) {
+    :root{
+        --micro-font-size: 1.0rem; /* 25px */
+        --small-font-size: 1.25rem; /* 30px */
+        --middle-font-size: 2.5rem; /* 80px */
+        --large-font-size: 3.5rem; /* 120px */
+    }
     .faq-list-container{
         flex-direction: column;
     }
@@ -549,14 +577,8 @@ body {
     .countdown{
         width: 90px;
     }
-    .navbar-container{
-        height: 10vh;
-    }
     .register-btn{
         height: fit-content;
-    }
-    .navbar-logo-img{
-        height: calc(100vh * 0.04);
     }
 }
 
