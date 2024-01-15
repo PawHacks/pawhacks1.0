@@ -180,61 +180,6 @@ faqList.forEach((faqElement) => {
 })
 
 
-/*                            Scroll animations                          */
-
-const headersList = document.querySelectorAll('.page-header');
-const headerObserver = new IntersectionObserver((headers)=> {
-    headers.forEach((element)=> {
-        if (element.isIntersecting){
-            element.target.classList.remove('hidden-header');
-            element.target.classList.add('visible-header');
-        }
-        else{
-            element.target.classList.remove('visible-header');
-            element.target.classList.add('hidden-header');
-        }
-    })
-})
-
-headersList.forEach( (header)=> {
-    headerObserver.observe(header)
-} )
-
-// lenis smooth-scroll
-const lenis = new Lenis()
-
-function raf(time) {
-    lenis.raf(time)
-    requestAnimationFrame(raf)
-}
-
-requestAnimationFrame(raf)
-
-// gsap for scroll-text animations
-gsap.registerPlugin(ScrollTrigger);
-const splitTypes = document.querySelectorAll('.content');
-splitTypes.forEach((char, i) => {
-    console.log(char);
-    const text = new SplitType(char, {types: 'chars,words'});
-
-    gsap.from(text.chars, {
-        scrollTrigger: {
-            trigger: char,
-            start: 'top 70%',
-            end: 'top 40%',
-            scrub: true,
-            markers: false,
-        },
-        opacity: 0.3,
-        stagger: 0.1,
-    })
-})
-
-
-/*                            navbar scroll animations                  */
-
-
-
 /*                            Cursor animation                          */
 
 const dt = 5; // update time in ms
@@ -350,3 +295,91 @@ setInterval(() => {
         })
     }
 }, dt)
+
+
+/*                            Scroll animations                          */
+
+// const headersList = document.querySelectorAll('.page-header');
+// const headerObserver = new IntersectionObserver((headers)=> {
+//     headers.forEach((element)=> {
+//         if (element.isIntersecting){
+//             element.target.classList.remove('hidden-header');
+//             element.target.classList.add('visible-header');
+//         }
+//         else{
+//             element.target.classList.remove('visible-header');
+//             element.target.classList.add('hidden-header');
+//         }
+//     })
+// })
+//
+// headersList.forEach( (header)=> {
+//     headerObserver.observe(header)
+// } )
+
+// lenis smooth-scroll
+const lenis = new Lenis({
+    lerp: 0.1
+});
+
+function raf(time) {
+    lenis.raf(time)
+    requestAnimationFrame(raf)
+}
+
+requestAnimationFrame(raf)
+
+// handle navbar links smoothscroll (scroll-behavior bugs with lenis)
+document.querySelectorAll('.navbar-link').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const href = this.getAttribute('href');
+        const offsetTop = document.querySelector(href).offsetTop;
+        const offset = 20 * window.innerHeight / 100; // 20vh
+
+        window.scrollTo({
+            top: offsetTop - offset,
+            behavior: 'smooth'
+        });
+    });
+});
+
+// gsap for scroll-text animations
+gsap.registerPlugin(ScrollTrigger);
+const splitTypes = document.querySelectorAll('.content');
+splitTypes.forEach((char, i) => {
+    console.log(char);
+    const text = new SplitType(char, {types: 'chars,words'});
+
+    gsap.from(text.chars, {
+        scrollTrigger: {
+            trigger: char,
+            start: 'top 70%',
+            end: 'top 40%',
+            scrub: true,
+            markers: false,
+        },
+        opacity: 0.3,
+        stagger: 0.1,
+    })
+})
+
+gsap.registerPlugin(ScrollTrigger);
+const headerSplit = document.querySelectorAll('.page-header');
+headerSplit.forEach((char, i) => {
+    console.log(char);
+    const text = new SplitType(char, {types: 'chars,words'});
+
+    gsap.from(text.chars, {
+        scrollTrigger: {
+            trigger: char,
+            start: 'top 90%',
+            end: 'top 60%',
+            scrub: true,
+            markers: false,
+        },
+        y: 100,
+        stagger: 0.1,
+    })
+})

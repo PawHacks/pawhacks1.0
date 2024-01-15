@@ -17,14 +17,14 @@
 *{
     box-sizing: border-box;
     font-weight: bold;
-    font-family: var(--main-font-family);
-    scroll-behavior: smooth;
+    /*scroll-behavior: smooth;*/
 }
 
 body {
     margin: 0;
     overflow-x: hidden;
     background-color: var(--white);
+    font-family: var(--main-font-family);
 }
 
 .page-header {
@@ -109,6 +109,7 @@ body {
     color: var(--white);
     text-decoration: none;
     transition: all 0.3s;
+    scroll-behavior: smooth;
 }
 
 .navbar-link:hover{
