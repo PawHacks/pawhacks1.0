@@ -1,10 +1,10 @@
 @import url('https://unpkg.com/css.gg@2.0.0/icons/css/push-chevron-down.css');
 
 :root{
-    --micro-font-size: 1.5vw; /* 25px */
-    --small-font-size: 2vw; /* 30px */
-    --middle-font-size: 5vw; /* 80px */
-    --large-font-size: 7vw; /* 120px */
+    --micro-font-size: 1.5rem; /* 25px */
+    --small-font-size: 2.25rem; /* 30px */
+    --middle-font-size: 5rem; /* 80px */
+    --large-font-size: 7rem; /* 120px */
     --black: #111111; /* 111111*/
     --white: #FAFAFA;
     --red: #D4202C;
@@ -28,22 +28,24 @@ body {
 }
 
 .page-header {
+    margin: 0 auto;
     text-align: center;
     font-size: var(--middle-font-size);
     font-family: var(--title-font-family);
     font-weight: normal;
     color: var(--green);
-    transition: transform 0.75s;
+    transition: width 2s linear;
+    overflow: hidden;
 }
 
 .hidden-header {
-    transform: scale(0);
-    opacity: 1.0;
+    width: 0;
+    opacity: 0;
 }
 
 .visible-header {
-    opacity: 1.0;
-    transform: scale(100%);
+    width: calc(var(--middle-font-size) * 10);
+    opacity: 100%;
 }
 
 .content {
@@ -88,7 +90,6 @@ body {
 
 .navbar-logo-img{
     margin: 10px;
-    height: calc(100% - 30px);
 }
 
 .navbar-list{
@@ -279,7 +280,7 @@ body {
 .about-wrapper{
     color: var(--black);
     background-color: var(--white);
-    text-align: center;
+    text-align: left;
     margin-bottom: 20vmin;
 }
 
@@ -390,46 +391,34 @@ body {
 /*                 Meet the team                    */
 
 .team-wrapper {
+    overflow: hidden;
+    white-space: nowrap;
     margin-bottom: 20vmin;
+}
+.team-wrapper > div{
+    margin-top: 5vmin;
 }
 
 .team-left img, .team-right img, .team-wrapper > div{
-    height: 10vmax;
+    height: 15vmax;
     margin-left: 5vmin;
     margin-right: 5vmin;
 }
 
 .team-left, .team-right{
-    position: absolute;
     display: inline-block;
-    white-space: nowrap;
-    animation-duration: 20s;
+    animation-name: carousel;
+    animation-duration: 30s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
 }
 
-.team-right {
-    animation-name: carousel-right;
-}
-
-.team-left{
-    animation-name: carousel-left;
-}
-
-@keyframes carousel-left {
+@keyframes carousel {
     0% {
         transform: translateX(0);
     }
     100%{
         transform: translateX(-100%);
-    }
-}
-@keyframes carousel-right {
-    0% {
-        transform: translateX(100%);
-    }
-    100%{
-        transform: translateX(0);
     }
 }
 
@@ -562,6 +551,14 @@ body {
         width: 100%;
         margin: 0;
     }
+    .navbar-container{
+        align-items: center;
+        height: 10vh;
+    }
+    .navbar-logo-img{
+        height: 50%;
+        content: url('assets/paw-icon.png');
+    }
 }
 
 @media (max-width: 800px) {
@@ -580,15 +577,8 @@ body {
     .countdown{
         width: 90px;
     }
-    .navbar-container{
-        align-items: center;
-        height: 15vh;
-    }
     .register-btn{
         height: fit-content;
-    }
-    .navbar-logo-img{
-        height: 25%;
     }
 }
 

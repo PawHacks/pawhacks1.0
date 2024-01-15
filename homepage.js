@@ -92,7 +92,7 @@ setTimeout(() => {
         yearCharacters[i].style.width = 'fit-content'
         yearCharacters[i].style.height = 'fit-content'
     }
-}, 300)
+}, 1000)
 
 //checks if title is clicked
 titleContainer.addEventListener('click', ()=>{
@@ -182,42 +182,53 @@ faqList.forEach((faqElement) => {
 
 /*                            Scroll animations                          */
 
-// const headersList = document.querySelectorAll('.page-header');
-// const headerObserver = new IntersectionObserver((headers)=> {
-//     headers.forEach((element)=> {
-//         if (element.isIntersecting){
-//             element.target.classList.remove('hidden-header');
-//             element.target.classList.add('visible-header');
-//         }
-//         else{
-//             element.target.classList.remove('visible-header');
-//             element.target.classList.add('hidden-header');
-//         }
-//     })
-// })
-//
-// headersList.forEach( (header)=> {
-//     headerObserver.observe(header)
-// } )
-//
-// const contentList = document.querySelectorAll('.content');
-// const contentObserver = new IntersectionObserver((contents)=> {
-//     contents.forEach((element)=> {
-//         if (element.isIntersecting){
-//             element.target.classList.remove('hidden-content');
-//             element.target.classList.add('visible-content');
-//         }
-//         else{
-//             element.target.classList.remove('visible-content');
-//             element.target.classList.add('hidden-content');
-//         }
-//     })
-// })
-//
-// contentList.forEach( (content)=> {
-//     contentObserver.observe(content);
-// } )
+const headersList = document.querySelectorAll('.page-header');
+const headerObserver = new IntersectionObserver((headers)=> {
+    headers.forEach((element)=> {
+        if (element.isIntersecting){
+            element.target.classList.remove('hidden-header');
+            element.target.classList.add('visible-header');
+        }
+        else{
+            element.target.classList.remove('visible-header');
+            element.target.classList.add('hidden-header');
+        }
+    })
+})
 
+headersList.forEach( (header)=> {
+    headerObserver.observe(header)
+} )
+
+// lenis smooth-scroll
+const lenis = new Lenis()
+
+function raf(time) {
+    lenis.raf(time)
+    requestAnimationFrame(raf)
+}
+
+requestAnimationFrame(raf)
+
+// gsap for scroll-text animations
+gsap.registerPlugin(ScrollTrigger);
+const splitTypes = document.querySelectorAll('.content');
+splitTypes.forEach((char, i) => {
+    console.log(char);
+    const text = new SplitType(char, {types: 'chars,words'});
+
+    gsap.from(text.chars, {
+        scrollTrigger: {
+            trigger: char,
+            start: 'top 70%',
+            end: 'top 40%',
+            scrub: true,
+            markers: false,
+        },
+        opacity: 0.3,
+        stagger: 0.1,
+    })
+})
 
 
 /*                            navbar scroll animations                  */

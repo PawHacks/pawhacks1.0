@@ -9,5 +9,8 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="css.gg" level="application" />
+    <orderEntry type="library" name="gsap" level="application" />
+    <orderEntry type="library" name="@studio-freight/lenis" level="application" />
+    <orderEntry type="library" name="split-type" level="application" />
   </component>
 </module>
