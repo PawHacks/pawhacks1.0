@@ -355,8 +355,8 @@ splitTypes.forEach((char, i) => {
     gsap.from(text.chars, {
         scrollTrigger: {
             trigger: char,
-            start: 'top 70%',
-            end: 'top 40%',
+            start: 'top 90%',
+            end: 'top 20%',
             scrub: true,
             markers: false,
         },
