@@ -198,7 +198,8 @@ body {
 }
 
 .early-interest-wrapper > p {
-    margin: 0;
+    margin-left: 10vw;
+    margin-right: 10vw;
     padding: 2.5vh 0 0 0;
     font-size: var(--micro-font-size);
     color: var(--black);
