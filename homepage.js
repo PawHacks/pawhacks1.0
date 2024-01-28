@@ -268,8 +268,6 @@ function cursorIsStationary(cursorList) {
         stationaryTime = 0;
     }
 
-    console.log(stationaryTime)
-
     return stationaryTime > stationaryThreshold;
 }
 
@@ -349,7 +347,6 @@ document.querySelectorAll('.navbar-link').forEach(anchor => {
 gsap.registerPlugin(ScrollTrigger);
 const splitTypes = document.querySelectorAll('.content');
 splitTypes.forEach((char, i) => {
-    console.log(char);
     const text = new SplitType(char, {types: 'chars,words'});
 
     gsap.from(text.chars, {
@@ -368,7 +365,6 @@ splitTypes.forEach((char, i) => {
 gsap.registerPlugin(ScrollTrigger);
 const headerSplit = document.querySelectorAll('.page-header');
 headerSplit.forEach((char, i) => {
-    console.log(char);
     const text = new SplitType(char, {types: 'chars,words'});
 
     gsap.from(text.chars, {
