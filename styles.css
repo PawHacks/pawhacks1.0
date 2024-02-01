@@ -384,7 +384,7 @@ body {
 
 .sponsors > div > a > img {
     margin: 3vw;
-    height: 10vmax;
+    height: 8vmax;
 }
 
 .special-contributions {
@@ -396,37 +396,61 @@ body {
 
 /*                 Meet the team                    */
 
+/*.team-wrapper {*/
+/*    overflow: hidden;*/
+/*    white-space: nowrap;*/
+/*    margin-bottom: 20vmin;*/
+/*}*/
+/*.team-wrapper > div{*/
+/*    margin-top: 5vmin;*/
+/*}*/
+
+/*.team-left img, .team-right img, .team-wrapper > div{*/
+/*    height: 15vmax;*/
+/*    margin-left: 5vmin;*/
+/*    margin-right: 5vmin;*/
+/*}*/
+
+/*.team-left, .team-right{*/
+/*    display: inline-block;*/
+/*    animation-name: carousel;*/
+/*    animation-duration: 60s;*/
+/*    animation-timing-function: linear;*/
+/*    animation-iteration-count: infinite;*/
+/*}*/
+
+/*@keyframes carousel {*/
+/*    0% {*/
+/*        transform: translateX(0);*/
+/*    }*/
+/*    100%{*/
+/*        transform: translateX(-100%);*/
+/*    }*/
+/*}*/
+
+/*                 Meet the team (static)            */
+
 .team-wrapper {
-    overflow: hidden;
-    white-space: nowrap;
     margin-bottom: 20vmin;
 }
-.team-wrapper > div{
-    margin-top: 5vmin;
+
+.meet-the-team{
+    padding-right: 10%;
+    padding-left: 10%;
 }
 
-.team-left img, .team-right img, .team-wrapper > div{
+.meet-the-team > div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.meet-the-team > div > img {
     height: 15vmax;
-    margin-left: 5vmin;
-    margin-right: 5vmin;
+    margin-top: 8vmin;
 }
 
-.team-left, .team-right{
-    display: inline-block;
-    animation-name: carousel;
-    animation-duration: 30s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-}
-
-@keyframes carousel {
-    0% {
-        transform: translateX(0);
-    }
-    100%{
-        transform: translateX(-100%);
-    }
-}
 
 /*                 Social Media                      */
 
