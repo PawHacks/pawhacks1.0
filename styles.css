@@ -391,7 +391,7 @@ body {
     text-align: center;
     font-size: var(--small-font-size);
     color: var(--green);
-    font-weight: normal;
+    font-weight: bolder;
 }
 
 /*                 Meet the team                    */
@@ -446,9 +446,16 @@ body {
     align-items: center;
 }
 
-.meet-the-team > div > img {
+.meet-the-team > div > a > img {
     height: 15vmax;
-    margin-top: 8vmin;
+    margin-bottom: 3vmin;
+}
+
+.team-name {
+    text-align: center;
+    font-size: var(--small-font-size);
+    color: var(--green);
+    font-weight: bolder;
 }
 
 
