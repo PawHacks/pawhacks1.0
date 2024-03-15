@@ -1,6 +1,6 @@
 /*             sliding countdown timer            */
 
-const eventTime = new Date('2024-03-16T18:00:00') // march 16 2024 6 pm
+const eventTime = new Date('2024-03-15T18:30:00') // march 15 2024 6:30 pm
 const countdownTimerList =  document.querySelectorAll('.countdown-timer .countdown');
 
 function updateCountdown(){
