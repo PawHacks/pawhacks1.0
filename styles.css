@@ -497,6 +497,22 @@ body {
     color: var(--red);
 }
 
+.privacy-btn {
+    border-radius: 1vw;
+    border: none;
+    font-family: var(--main-font-family);
+    font-size: var(--micro-font-size);
+    background-color: var(--red);
+    color: var(--black);
+    transition: all 0.4s;
+}
+
+.privacy-btn:hover {
+    background-color: var(--white);
+    color: var(--red);
+    cursor: pointer;
+}
+
 
 /*                 Cursor animations               */
 
